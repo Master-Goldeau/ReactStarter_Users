@@ -1,8 +1,8 @@
 export const USER_SELECTED = "USER_SELECTED";
 export function selectUser(user) {
-  console.log("---");
+  console.log("---")
   console.log("selected : ", user);
-  console.log("---");
+  console.log("---")
 
   return {
     type: USER_SELECTED,

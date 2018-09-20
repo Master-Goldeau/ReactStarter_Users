@@ -8,17 +8,17 @@ class UserList extends Component {
     return (
       <div>
         <ul className="col-md-4">
-          {
-            this.props.myUsers.map((user) => {
-              return (
-                <li className="list-group-item"
-                key={user.id}
-                onClick={() => this.props.selectUser(user)}>
-                {user.name}
-                </li>
-              );
-            })
-          }
+          {this.props.usersPassedToProps.map(aLineFromTheReducer => {
+            return (
+              <li
+                className="list-group-item"
+                key={aLineFromTheReducer.id}
+                onClick={() => this.props.selectUser(aLineFromTheReducer)}
+              >
+                {aLineFromTheReducer.name}
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
@@ -27,12 +27,15 @@ class UserList extends Component {
 
 function mapStateToProps(state) {
   return {
-    myUsers : state.users
+    usersPassedToProps: state.usersFromReducer
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  bindActionCreators({ selectUser: selectUser }, dispatch);
+  return bindActionCreators({ selectUser: selectUser }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserList);
